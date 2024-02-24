@@ -23,12 +23,12 @@ void Game::Initialize()
 		return; 
 	}
 
-	SDL_Window * window = SDL_CreateWindow("Macross",
+	SDL_Window * window = SDL_CreateWindow(NULL,
 		SDL_WINDOWPOS_CENTERED, 
 		SDL_WINDOWPOS_CENTERED,
 		600,
 		400,
-		0);
+		SDL_WINDOW_BORDERLESS);
 	//If such pointer can be flipped to null, throw an error
 	if(!window)
 	{
@@ -36,7 +36,7 @@ void Game::Initialize()
 		return;
 	}
 
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
 
 	if(!renderer)
 	{
@@ -48,18 +48,6 @@ void Game::Initialize()
 }
 
 
-void Game::Run()
-{
-	//TODO
-	std::cout << "Run  Method  Called!" << std::endl;
-	while(is_running)
-	{
-		ProcessInput();
-		Update();
-		Render();
-	}
-
-}
 
 void Game::ProcessInput()
 {
@@ -74,6 +62,13 @@ void Game::ProcessInput()
 			case SDL_QUIT:
 				is_running = false;
 				break;
+			case SDL_KEYDOWN:
+				if(e.key.keysym.sym == SDLK_ESCAPE)
+				{
+
+				is_running = false;
+				}
+				break;
 		}
 	}
 }
@@ -86,10 +81,22 @@ void Game::Update()
 
 void Game::Render()
 {
-	//TODO:
-	std::cout << "Render  Method  Called!" << std::endl;
+	SDL_RenderClear(renderer);
+	SDL_RenderPresent(renderer);
 }
 
+void Game::Run()
+{
+	//TODO
+	std::cout << "Run  Method  Called!" << std::endl;
+	while(is_running)
+	{
+		ProcessInput();
+		Update();
+		Render();
+	}
+
+}
 
 void Game::Destroy()
 {
