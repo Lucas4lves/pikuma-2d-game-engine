@@ -23,8 +23,11 @@ void Game::Initialize()
 		return; 
 	}
 
-	windowHeight = 400;
-	windowWidth = 600;
+	SDL_DisplayMode display_mode;
+	SDL_GetCurrentDisplayMode(0, &display_mode);
+
+	windowHeight = 600;//display_mode.h;
+	windowWidth = 400;//display_mode.w;
 
 	window = SDL_CreateWindow("Macross",
 		SDL_WINDOWPOS_CENTERED, 
@@ -46,6 +49,8 @@ void Game::Initialize()
 		fprintf(stderr, "Error: %s", SDL_GetError());
 		return;
 	}
+
+	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 
 	is_running = true;
 }
