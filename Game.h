@@ -17,5 +17,8 @@ class Game
 		void Update();
 		void Render();
 		void Run();
+
+		int windowWidth;
+		int windowHeight;
 };
 #endif

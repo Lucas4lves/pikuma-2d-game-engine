@@ -1,6 +1,6 @@
-#include "../Game.h"
 #include <iostream>
 #include <SDL2/SDL.h>
+#include "../Game.h"
 
 Game::Game()
 {
@@ -23,12 +23,15 @@ void Game::Initialize()
 		return; 
 	}
 
-	SDL_Window * window = SDL_CreateWindow(NULL,
+	windowHeight = 400;
+	windowWidth = 600;
+
+	window = SDL_CreateWindow("Macross",
 		SDL_WINDOWPOS_CENTERED, 
 		SDL_WINDOWPOS_CENTERED,
-		600,
-		400,
-		SDL_WINDOW_BORDERLESS);
+		windowWidth,
+		windowHeight,
+		0);
 	//If such pointer can be flipped to null, throw an error
 	if(!window)
 	{
@@ -36,7 +39,7 @@ void Game::Initialize()
 		return;
 	}
 
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
 
 	if(!renderer)
 	{
@@ -82,6 +85,8 @@ void Game::Update()
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+
 	SDL_RenderPresent(renderer);
 }
 
