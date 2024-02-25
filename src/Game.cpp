@@ -49,8 +49,8 @@ void Game::Initialize()
 		fprintf(stderr, "Error: %s", SDL_GetError());
 		return;
 	}
-
-	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+	
+	player = {10, 10, 20, 20};
 
 	is_running = true;
 }
@@ -81,6 +81,12 @@ void Game::ProcessInput()
 	}
 }
 
+
+void Game::Setup(){
+	//TODO(Lucas): Initialize game objects
+	
+}
+
 void Game::Update()
 {
 	//TODO:
@@ -89,9 +95,11 @@ void Game::Update()
 
 void Game::Render()
 {
+	SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
 	SDL_RenderClear(renderer);
+	//TODO: Render game objects
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-
+	SDL_RenderFillRect(renderer, &player);
 	SDL_RenderPresent(renderer);
 }
 

@@ -7,11 +7,13 @@ class Game
 		//TODO:
 		SDL_Window *window;		
 		SDL_Renderer *renderer;
+		SDL_Rect player;
 		bool is_running;
 	public:
 		Game();
 		~Game();
 		void Initialize();
+		void Setup();
 		void Destroy();
 		void ProcessInput();
 		void Update();
