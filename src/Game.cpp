@@ -107,7 +107,7 @@ void Game::Update()
 
 void Game::Render()
 {
-	SDL_SetRenderDrawColor(renderer, 150, 21, 21, 255);
+	SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
 	SDL_RenderClear(renderer);
 	//TODO: Render game objects
 	//Render present swaps the buffers
