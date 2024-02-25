@@ -81,15 +81,19 @@ void Game::ProcessInput()
 }
 
 
+glm::vec2 player_position;
+glm::vec2 player_velocity;
+
 void Game::Setup(){
 	//TODO(Lucas): Initialize game objects
-	
+	player_position = glm::vec2(10.0, 20.0);
+	player_velocity = glm::vec2(1.0, 0.0);
 }
 
 void Game::Update()
 {
-	//TODO:
-	std::cout << "Update Method  Called!" << std::endl;
+	player_position.x += player_velocity.x;
+	player_position.y += player_velocity.y;
 }
 
 void Game::Render()
@@ -102,7 +106,11 @@ void Game::Render()
 	SDL_Texture * tank_texture = SDL_CreateTextureFromSurface(renderer, tank_surface);
 	SDL_FreeSurface(tank_surface);
 	
-	SDL_Rect dstRect = {50, 50, 32, 32};
+	SDL_Rect dstRect = {static_cast<int>(player_position.x), 
+						static_cast<int>(player_position.y), 
+						32, 
+						32
+						};
 	SDL_RenderCopy(renderer, tank_texture, NULL, &dstRect);
 
 	SDL_DestroyTexture(tank_texture);
@@ -115,6 +123,7 @@ void Game::Run()
 {
 	//TODO
 	std::cout << "Run  Method  Called!" << std::endl;
+	Setup();
 	while(is_running)
 	{
 		ProcessInput();
