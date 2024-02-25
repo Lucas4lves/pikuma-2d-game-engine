@@ -4,7 +4,7 @@
 CC = g++
 LANG_STD = -std=c++17
 SOURCE_FILES = ./src/*.cpp ./src/Game/*.cpp ./src/Logger/*.cpp
-C_FLAGS = -Wall 
+C_FLAGS = -Wall -Wfatal-errors 
 L_FLAGS = -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -llua5.3
 INCLUDE = -I "./libs"
 APP_NAME = gameengine
