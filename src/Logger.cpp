@@ -2,14 +2,23 @@
 #include <chrono>
 #include <ctime>
 
+
+std::string Logger::CurrentDateTimeToString(){
+
+    std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    std::string output(30, '\0');
+    //args first_char, last_char, format, src-time_t
+    std::strftime(&output[0], output.size(), "%d-%b-%Y %H:%M:%S", std::localtime(&now));
+
+    return output;
+}
+
 void Logger::Log(const std::string &message){
-    auto temp = std::chrono::system_clock::now();
-
-    std::time_t moment = std::chrono::system_clock::to_time_t(temp);
-
-    std::cout << "LOG: " << "[" << std::ctime(&moment) << message << "]" << std::endl;
+    std::string out = CurrentDateTimeToString();
+    std::cout << "LOG: " << "[" << out << " " << message << "]" << std::endl;
 }
 
 void Logger::Error(const std::string &message){
-    std::cerr << message << std::endl;
+    std::string out = CurrentDateTimeToString();
+    std::cerr << "ERROR: " << "[" << out << " " << message << "]" << std::endl;
 }
