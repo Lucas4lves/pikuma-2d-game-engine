@@ -87,13 +87,25 @@ glm::vec2 player_velocity;
 void Game::Setup(){
 	//TODO(Lucas): Initialize game objects
 	player_position = glm::vec2(10.0, 20.0);
-	player_velocity = glm::vec2(1.0, 0.0);
+	player_velocity = glm::vec2(150.0, 0.0);
 }
 
 void Game::Update()
 {
-	player_position.x += player_velocity.x;
-	player_position.y += player_velocity.y;
+	//TODO: If we are too fast, we gotta keep it up to the framerate
+	//while(!SDL_TICKS_PASSED(SDL_GetTicks(), milliseconds_prev_frame + MILLISECONDS_PER_FRAME)); <= too wasteful strategy
+
+	int time_to_wait = MILLISECONDS_PER_FRAME - (SDL_GetTicks() - milliseconds_prev_frame);
+	if(time_to_wait > 0 && time_to_wait <= MILLISECONDS_PER_FRAME)
+	{
+		SDL_Delay(time_to_wait);
+	}
+
+	double delta_time = (SDL_GetTicks() - milliseconds_prev_frame) / 1000.0f;
+
+	milliseconds_prev_frame = SDL_GetTicks();
+	player_position.x += player_velocity.x * delta_time;
+	player_position.y += player_velocity.y * delta_time;
 }
 
 void Game::Render()

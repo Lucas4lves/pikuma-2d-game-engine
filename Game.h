@@ -4,10 +4,15 @@
 #include <SDL2/SDL_image.h>
 #include <glm/glm.hpp>
 
+//Capping framerate
+const int FPS = 30;
+const int MILLISECONDS_PER_FRAME = 1000 / FPS;
+
 class Game
 {
 	private:
 		//TODO:
+		int milliseconds_prev_frame = 0;
 		SDL_Window *window;		
 		SDL_Renderer *renderer;
 		SDL_Rect player;
