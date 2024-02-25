@@ -2,10 +2,11 @@
 #define GAME_H
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <logger/Logger.h>
 #include <glm/glm.hpp>
 
 //Capping framerate
-const int FPS = 30;
+const int FPS = 60; 
 const int MILLISECONDS_PER_FRAME = 1000 / FPS;
 
 class Game

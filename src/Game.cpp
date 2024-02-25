@@ -4,19 +4,17 @@
 Game::Game()
 {
 	//TODO:
-	std::cout << "Constructor Called!" << std::endl;
+	Logger::Log("Constructor Called!");
 }
 
 Game::~Game()
 {
 	//TODO:
-	std::cout << "Destructor Called!" << std::endl;
 }
 
 void Game::Initialize()
 {
 	//TODO:
-	std::cout << "Initialize Method  Called!" << std::endl;
 	if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
 		fprintf(stderr, "Error: %s\n", SDL_GetError());
 		return; 
@@ -59,7 +57,6 @@ void Game::Initialize()
 void Game::ProcessInput()
 {
 	//TODO:
-	std::cout << "Process Input  Method  Called!" << std::endl;
 	SDL_Event e;
 
 	while(SDL_PollEvent(&e))
@@ -95,11 +92,11 @@ void Game::Update()
 	//TODO: If we are too fast, we gotta keep it up to the framerate
 	//while(!SDL_TICKS_PASSED(SDL_GetTicks(), milliseconds_prev_frame + MILLISECONDS_PER_FRAME)); <= too wasteful strategy
 
-	int time_to_wait = MILLISECONDS_PER_FRAME - (SDL_GetTicks() - milliseconds_prev_frame);
-	if(time_to_wait > 0 && time_to_wait <= MILLISECONDS_PER_FRAME)
-	{
-		SDL_Delay(time_to_wait);
-	}
+	//int time_to_wait = MILLISECONDS_PER_FRAME - (SDL_GetTicks() - milliseconds_prev_frame);
+	//if(time_to_wait > 0 && time_to_wait <= MILLISECONDS_PER_FRAME)
+	//{
+	//	SDL_Delay(time_to_wait);
+	//}
 
 	double delta_time = (SDL_GetTicks() - milliseconds_prev_frame) / 1000.0f;
 
@@ -134,7 +131,7 @@ void Game::Render()
 void Game::Run()
 {
 	//TODO
-	std::cout << "Run  Method  Called!" << std::endl;
+	Logger::Log("Run Method Called!");
 	Setup();
 	while(is_running)
 	{
@@ -148,7 +145,7 @@ void Game::Run()
 void Game::Destroy()
 {
 	//TODO:
-	std::cout << "Destroy  Method  Called!" << std::endl;
+	Logger::Log("Destroy all humans!");
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
