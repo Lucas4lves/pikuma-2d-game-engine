@@ -1,5 +1,4 @@
 #include <iostream>
-#include <SDL2/SDL.h>
 #include "../Game.h"
 
 Game::Game()
@@ -26,8 +25,8 @@ void Game::Initialize()
 	SDL_DisplayMode display_mode;
 	SDL_GetCurrentDisplayMode(0, &display_mode);
 
-	windowHeight = 600;//display_mode.h;
-	windowWidth = 400;//display_mode.w;
+	windowHeight = display_mode.h;
+	windowWidth = display_mode.w;
 
 	window = SDL_CreateWindow("Macross",
 		SDL_WINDOWPOS_CENTERED, 
@@ -42,15 +41,15 @@ void Game::Initialize()
 		return;
 	}
 
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+	renderer = SDL_CreateRenderer(window, -1, 0);
 
 	if(!renderer)
 	{
 		fprintf(stderr, "Error: %s", SDL_GetError());
 		return;
 	}
-	
-	player = {10, 10, 20, 20};
+
+	SDL_SetWindowDisplayMode(window, NULL);
 
 	is_running = true;
 }
@@ -95,11 +94,20 @@ void Game::Update()
 
 void Game::Render()
 {
-	SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
+	SDL_SetRenderDrawColor(renderer, 150, 21, 21, 255);
 	SDL_RenderClear(renderer);
 	//TODO: Render game objects
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-	SDL_RenderFillRect(renderer, &player);
+	//Render present swaps the buffers
+	SDL_Surface * tank_surface = IMG_Load("./assets/images/tree.png"); //relative path to the game's executable	
+	SDL_Texture * tank_texture = SDL_CreateTextureFromSurface(renderer, tank_surface);
+	SDL_FreeSurface(tank_surface);
+	
+	SDL_Rect dstRect = {50, 50, 32, 32};
+	SDL_RenderCopy(renderer, tank_texture, NULL, &dstRect);
+
+	SDL_DestroyTexture(tank_texture);
+
+
 	SDL_RenderPresent(renderer);
 }
 
