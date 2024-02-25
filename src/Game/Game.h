@@ -2,7 +2,7 @@
 #define GAME_H
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <logger/Logger.h>
+#include "../Logger/Logger.h" 
 #include <glm/glm.hpp>
 
 //Capping framerate

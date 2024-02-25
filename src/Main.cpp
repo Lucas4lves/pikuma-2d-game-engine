@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../Game.h"
+#include "./Game/Game.h"
 /*
 # Game Loop: 
 PROCESS INPUT -> UPDATE THE GAME -> RENDER (displaying things)

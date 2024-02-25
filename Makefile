@@ -1,6 +1,19 @@
+###############################################################
+## Declaring Makefile Vars ####################################
+###############################################################
+CC = g++
+LANG_STD = -std=c++17
+SOURCE_FILES = ./src/*.cpp ./src/Game/*.cpp ./src/Logger/*.cpp
+C_FLAGS = -Wall 
+L_FLAGS = -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -llua5.3
+INCLUDE = -I "./libs"
+APP_NAME = gameengine
+OUTPUT_FILE = -o $(APP_NAME)
+
+
 build:
-	g++ ./src/*.cpp -Wall -std=c++17 -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -llua5.3 -I "./libs"
+	$(CC) $(SOURCE_FILES) $(C_FLAGS) $(LANG_STD) $(L_FLAGS) $(INCLUDE) $(OUTPUT_FILE)
 run:
-	./a.out
+	./$(APP_NAME)	
 clean:
-	rm ./a.out
+	rm ./$(APP_NAME)
