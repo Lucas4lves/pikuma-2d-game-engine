@@ -37,7 +37,7 @@ class System{
         std::vector<Entity> _entities;
     public:
         System() = default;
-        ~System() = default;
+        virtual ~System() = default;
 
         void AddEntityToSystem(Entity e);
         void RemoveEntityFromSystem(Entity e);
