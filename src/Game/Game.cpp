@@ -3,13 +3,11 @@
 
 Game::Game()
 {
-	//TODO:
 	Logger::Log("Constructor Called!");
 }
 
 Game::~Game()
 {
-	//TODO:
 }
 
 void Game::Initialize()
@@ -56,7 +54,6 @@ void Game::Initialize()
 
 void Game::ProcessInput()
 {
-	//TODO:
 	SDL_Event e;
 
 	while(SDL_PollEvent(&e))
@@ -111,8 +108,10 @@ void Game::Render()
 	SDL_RenderClear(renderer);
 	//TODO: Render game objects
 	//Render present swaps the buffers
+	// In order to render a texture, first we gotta have a surface
 	SDL_Surface * tank_surface = IMG_Load("./assets/images/tree.png"); //relative path to the game's executable	
 	SDL_Texture * tank_texture = SDL_CreateTextureFromSurface(renderer, tank_surface);
+
 	SDL_FreeSurface(tank_surface);
 	
 	SDL_Rect dstRect = {static_cast<int>(player_position.x), 
@@ -130,7 +129,6 @@ void Game::Render()
 
 void Game::Run()
 {
-	//TODO
 	Logger::Log("Run Method Called!");
 	Setup();
 	while(is_running)
@@ -144,7 +142,6 @@ void Game::Run()
 
 void Game::Destroy()
 {
-	//TODO:
 	Logger::Log("Destroy all humans!");
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
