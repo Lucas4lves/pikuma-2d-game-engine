@@ -75,13 +75,13 @@ void Game::ProcessInput()
 }
 
 
-glm::vec2 player_position;
-glm::vec2 player_velocity;
 
 void Game::Setup(){
-	//TODO(Lucas): Initialize game objects
-	player_position = glm::vec2(10.0, 20.0);
-	player_velocity = glm::vec2(150.0, 0.0);
+	//TODO:
+	//Create an entity TANGK -> Entity Tank = _registry.CreateEntity(int id);
+	//Tank.AddComponent(Component TransformComponent);
+	//Tank.AddComponent(Component BoxColliderComponent);
+	//Tank.AddComponent(Component SpriteComponent); ...
 }
 
 void Game::Update()
@@ -98,8 +98,11 @@ void Game::Update()
 	double delta_time = (SDL_GetTicks() - milliseconds_prev_frame) / 1000.0f;
 
 	milliseconds_prev_frame = SDL_GetTicks();
-	player_position.x += player_velocity.x * delta_time;
-	player_position.y += player_velocity.y * delta_time;
+
+	//TODO: 
+	//MovementSystem.Update();
+	//CollisionSystem.Update();
+	//DamageSystem.Update();
 }
 
 void Game::Render()
@@ -109,22 +112,6 @@ void Game::Render()
 	//TODO: Render game objects
 	//Render present swaps the buffers
 	// In order to render a texture, first we gotta have a surface
-	SDL_Surface * tank_surface = IMG_Load("./assets/images/tree.png"); //relative path to the game's executable	
-	SDL_Texture * tank_texture = SDL_CreateTextureFromSurface(renderer, tank_surface);
-
-	SDL_FreeSurface(tank_surface);
-	
-	SDL_Rect dstRect = {static_cast<int>(player_position.x), 
-						static_cast<int>(player_position.y), 
-						32, 
-						32
-						};
-	SDL_RenderCopy(renderer, tank_texture, NULL, &dstRect);
-
-	SDL_DestroyTexture(tank_texture);
-
-
-	SDL_RenderPresent(renderer);
 }
 
 void Game::Run()

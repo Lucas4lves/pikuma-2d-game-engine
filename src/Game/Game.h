@@ -1,5 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
+
+#include "../ECS/ECS.h"
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "../Logger/Logger.h" 
