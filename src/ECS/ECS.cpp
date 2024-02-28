@@ -12,9 +12,15 @@ void System::AddEntityToSystem(Entity e){
 }
 
 void System::RemoveEntityFromSystem(Entity e){
-    //std::vector<Entity>::iterator findEntity = std::find(_entities.begin(), _entities.end(), e);
+    _entities.erase(std::remove_if(_entities.begin(), _entities.end(), [&e](Entity other){
+        return e.GetId() == other.GetId();
+    }), _entities.end());
 }
-std::vector<Entity> System::GetSystemEntities() const {}
-Signature& System::GetComponentSignature() const {}
+std::vector<Entity> System::GetSystemEntities() const {
+    return _entities;
+}
+const Signature& System::GetComponentSignature() const {
+    return _componentSignature;
+}
 
 
