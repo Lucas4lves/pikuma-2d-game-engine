@@ -109,6 +109,7 @@ void Game::Render()
 {
 	SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
 	SDL_RenderClear(renderer);
+	SDL_RenderPresent(renderer);
 	//TODO: Render game objects
 	//Render present swaps the buffers
 	// In order to render a texture, first we gotta have a surface
